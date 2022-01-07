@@ -1,6 +1,6 @@
 ---
 - name: Playbook for job template
-  hosts: all
+  hosts: localhost
   tasks:
   - name: To Display Message
     debug:
