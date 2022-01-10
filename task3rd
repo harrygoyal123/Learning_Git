@@ -1,0 +1,8 @@
+#ansible-playbook task3.yml
+---
+ - name: Running both roles to create directory and to check if it exists
+   hosts: web
+   become: yes
+   roles:
+     - name: test-role-0
+     - name: test-role-1
