@@ -1,0 +1,6 @@
+---
+# tasks file for test-role-0
+ - name: Create a Directory in server
+   file:
+     path: /tmp/hello_directory
+     state: directory
