@@ -4,5 +4,5 @@
    hosts: web
    become: yes
    roles:
-     test-role-0
-     test-role-1
+     - test-role-0
+     - test-role-1
