@@ -1,1 +1,2 @@
-Get-Service
+Get-Service 
+Get-Help
