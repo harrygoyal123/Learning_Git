@@ -1,0 +1,31 @@
+---
+# tasks file for postrole
+  - name: add psqlkey to apt source
+    apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc state=present
+
+  - name: add psql source
+    apt_repository:
+      repo: "deb http://apt.postgresql.org/pub/repos/apt {{ansible_distribution_release}}-pgdg main"
+      state: present
+
+  - name: install psql
+    apt:
+      name: postgresql-{{psql_version}}
+      update_cache: true
+
+  - name: install additional Psql packages
+    apt:
+      name: "{{item}}"
+    with_items:
+      - postgresql-contrib-{{psql_version}}
+      - postgresql-server-dev-{{psql_version}}
+      - libpq-dev
+
+  - name: allow user login to psql
+    lineinfile:
+      dest: /etc/postgresql/{{psql_version}}/main/pg_hba.conf
+      regexp: "local  all     all     peer"
+      line:   "local  all     all     md5"
+
+    notify: 
+      - restart psql

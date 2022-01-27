@@ -1,0 +1,3 @@
+---
+# vars file for postrole
+psql_version: 12
