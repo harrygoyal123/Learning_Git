@@ -1,0 +1,30 @@
+---
+# tasks file for playrole
+
+ - name: update yum
+   yum:
+     name: "*"
+     state: latest
+
+ - name: install repo for PostgreSQL
+   yum:
+     name: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+     state: latest
+
+ - name: install PostgreSQL version {{version}}
+   yum:
+     name: "{{ item }}"
+     state: latest
+   with_items:
+     - postgresql{{version}}-server
+
+ - name: create data cluster
+   command: /usr/pgsql-{{version}}/bin/postgresql-{{version}}-setup initdb
+
+ - service:
+     name: postgresql-{{version}}
+     state: started
+     enabled: yes
+
+   notify:
+     - Restart psql

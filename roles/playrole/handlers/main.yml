@@ -1,0 +1,6 @@
+---
+# handlers file for playrole
+ - name: Restart psql
+   service:
+     name: postgresql-{{version}}
+     state: restarted
