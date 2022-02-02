@@ -26,11 +26,12 @@
    with_items:
      - postgresql{{version}}-server
 
- - name: create data cluster
+ - name: Initialize the database create data cluster if not exist
    command: /usr/pgsql-{{version}}/bin/postgresql-{{version}}-setup initdb
    when: not postgres_data.stat.exists
 
- - service:
+ - name: Enable automatic start
+   service:
      name: postgresql-{{version}}
      state: started
      enabled: yes
