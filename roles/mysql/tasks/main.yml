@@ -1,0 +1,34 @@
+---
+# tasks file for mysql
+
+  - name: update yum
+    yum:
+      name: "*"
+      state: latest
+
+  - name: Installing python for sql
+    yum: 
+     name: MySQL-python
+     state: installed
+
+  - name: Creating a Directory in {{ inventory_hostname }}
+    file:
+     path: /usr/mysql
+     state: directory
+
+  - name: Downloading Library
+    get_url:
+     url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+     dest: /usr/mysql/mysql-community-release-el7-5.noarch.rpm
+
+  - name: installing rpm
+    yum: 
+     name: /usr/mysql/mysql-community-release-el7-5.noarch.rpm
+     state: present
+
+  - name: Installing MySql
+    yum:
+     name: mysql-server
+     state: installed
+    notify:
+     - restart mysql
