@@ -30,5 +30,13 @@
     yum:
      name: mysql-server
      state: installed
+     
+  - name: mysql status
+    shell: service mysql status
+    register: current_status
+
+  - debug:
+      var: current_status
+
     notify:
      - restart mysql
