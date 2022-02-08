@@ -8,7 +8,7 @@
     command: mysqlshow
     register: info
   - debug:
-      var: info
+      var: info.stdout_lines
  
     notify: 
       - restart mysql
