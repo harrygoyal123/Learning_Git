@@ -1,0 +1,14 @@
+---
+# tasks file for db_creation
+  - name: Creating a database
+    mysql_db:
+      name: cloud automation
+      state: present
+  - name: List The databases
+    command: mysqlshow
+    register: info
+  - debug:
+      var: info
+ 
+    notify: 
+      - restart mysql

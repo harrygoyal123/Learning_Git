@@ -1,0 +1,7 @@
+---
+# handlers file for db_creation
+- name: restart mysql
+  service:
+     name: mysql
+     state: restarted
+
