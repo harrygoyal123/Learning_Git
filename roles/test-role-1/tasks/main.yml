@@ -1,9 +1,0 @@
----
-# tasks file for test-role-1
- - name: Check existence of directory
-   stat:
-     path: /tmp/hello_directory
-   register: file_details
- - debug:
-     msg: "The directory exists"
-   when: file_details.stat.exists

@@ -1,7 +1,0 @@
----
-- name: Playbook for job template
-  hosts: localhost
-  tasks:
-  - name: To Display Message
-    debug:
-      msg: "Hello Team Automation"

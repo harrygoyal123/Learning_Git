@@ -1,3 +1,0 @@
-- hosts: localhost
-  roles:
-    - cpu_util_role
