@@ -32,11 +32,11 @@
      state: installed
      
   - name: mysql status
-    shell: service mysql status
+    command: systemctl status mysql
     register: current_status
 
   - debug:
-      var: current_status
+      var: current_status.stdout_lines
 
     notify:
      - restart mysql
