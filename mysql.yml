@@ -1,6 +1,6 @@
 ---
 - name: Installing Mysql db
-  hosts: all
+  hosts: localhost
   gather_facts: no
   become: yes
   roles:
