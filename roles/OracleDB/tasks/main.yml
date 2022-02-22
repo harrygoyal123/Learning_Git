@@ -112,7 +112,7 @@
 - name: Download Oracle 19c archive from server
   get_url:
     url: "{{ oracle19c_url }}"
-    dest: "/tmp/u01/stage/LINUX.X64_193000_db_home.zip"
+    dest: "/u01/stage/LINUX.X64_193000_db_home.zip"
     mode: '0775'
   tags:
     - download_oracle19c
@@ -122,7 +122,7 @@
   become: yes
   become_user: "{{ oracle_user }}"
   unarchive:
-     src=/tmp/u01/stage/LINUX.X64_193000_db_home.zip
+     src=/u01/stage/LINUX.X64_193000_db_home.zip
      dest=/u01/app/oracle/product/19.3.0/db100
      remote_src=no
      mode=0775
