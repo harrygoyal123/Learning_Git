@@ -1,4 +1,0 @@
-- hosts: all
-  become: yes
-  roles:
-   - dbsoftware19c_install
