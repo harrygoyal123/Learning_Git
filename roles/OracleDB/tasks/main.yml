@@ -118,15 +118,15 @@
     - download_oracle19c
 
 - name: Unpack Oracle 19c Database Software to the target server
-#  remote_user: "{{ root_user }}"
-#  become: yes
-#  become_user: "{{ oracle_user }}"
+  remote_user: "{{ root_user }}"
+  become: yes
+  become_user: "{{ oracle_user }}"
   unarchive:
      src=/tmp/u01/stage/LINUX.X64_193000_db_home.zip
      dest=/u01/app/oracle/product/19.3.0/db100
-#     remote_src=no
-#     mode=0775
-#     owner="{{ oracle_user }}"
+     remote_src=no
+     mode=0775
+     owner="{{ oracle_user }}"
   tags:
    - db19c_unpackdbsoftware
 
