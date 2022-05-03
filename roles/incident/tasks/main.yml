@@ -1,5 +1,11 @@
- - name: Install pysnow
-   command: pip install pysnow
+ - name: Update pip on local tower
+   pip:
+     name: pip
+     state: latest
+ - name: Install on local tower
+   pip:
+     name: pysnow
+     state: present
  - name: Open a SNOW Incident
    block:
      - name: Create an Incident
