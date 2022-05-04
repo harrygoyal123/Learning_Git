@@ -1,6 +1,7 @@
  - name: Install pysnow
-   pip:
-     name: pysnow
+     - easy_install:
+         name: pysnow
+         state: latest
  - name: Open a SNOW Incident
    block:
      - name: Create an Incident
