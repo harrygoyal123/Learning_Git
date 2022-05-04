@@ -1,5 +1,5 @@
  - name: Install pysnow
-   easy_install:
+   pip:
      name: pysnow
      state: latest
  - name: Open a SNOW Incident
