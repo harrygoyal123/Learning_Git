@@ -1,5 +1,5 @@
  - name: Install pysnow
-   pip:
+   pip3:
      name: pysnow
  - name: Open a SNOW Incident
    block:
