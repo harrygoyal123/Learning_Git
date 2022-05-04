@@ -1,7 +1,7 @@
  - name: Install pysnow
-     - easy_install:
-         name: pysnow
-         state: latest
+   easy_install:
+     name: pysnow
+     state: latest
  - name: Open a SNOW Incident
    block:
      - name: Create an Incident
