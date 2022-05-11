@@ -1,6 +1,4 @@
 ---
 # tasks file for snowpip
 - name: Install pip
-  yum:
-    name: python-pip
-    state: latest
+  command: sudo yum install python-pip
