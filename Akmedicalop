@@ -1,0 +1,105 @@
+output "arn" {
+  description = "Amazon Resource Name (ARN) of the cluster."
+  value       = aws_redshift_cluster.redshift.arn
+}
+
+output "id" {
+  description = "The Redshift Cluster ID."
+  value       = aws_redshift_cluster.redshift.id
+}
+
+output "cluster_identifier" {
+  description = "The Cluster Identifier."
+  value       = aws_redshift_cluster.redshift.cluster_identifier
+}
+
+output "cluster_type" {
+  description = "The cluster type."
+  value       = aws_redshift_cluster.redshift.cluster_type
+}
+
+output "node_type" {
+  description = "The type of nodes in the cluster."
+  value       = aws_redshift_cluster.redshift.node_type
+}
+
+output "database_name" {
+  description = "The name of the default database in the cluster."
+  value       = aws_redshift_cluster.redshift.database_name
+}
+
+output "availability_zone" {
+  description = "The availability zone of the cluster."
+  value       = aws_redshift_cluster.redshift.availability_zone
+}
+
+output "automated_snapshot_retention_period" {
+  description = "The backup retention period."
+  value       = aws_redshift_cluster.redshift.automated_snapshot_retention_period
+}
+
+output "preferred_maintenance_window" {
+  description = "The backup window."
+  value       = aws_redshift_cluster.redshift.preferred_maintenance_window
+}
+
+output "endpoint" {
+  description = "The connection endpoint."
+  value       = aws_redshift_cluster.redshift.endpoint
+}
+
+output "encrypted" {
+  description = "Whether the data in the cluster is encrypted."
+  value       = aws_redshift_cluster.redshift.encrypted
+}
+
+output "vpc_security_group_ids" {
+  description = "The VPC security group Ids associated with the cluster."
+  value       = aws_redshift_cluster.redshift.vpc_security_group_ids
+}
+
+output "dns_name" {
+  description = "The DNS name of the cluster."
+  value       = aws_redshift_cluster.redshift.dns_name
+}
+
+output "port" {
+  description = "The Port the cluster responds on."
+  value       = aws_redshift_cluster.redshift.port
+}
+
+output "cluster_version" {
+  description = "The version of Redshift engine software."
+  value       = aws_redshift_cluster.redshift.cluster_version
+}
+
+output "cluster_parameter_group_name" {
+  description = "The name of the parameter group associated with this cluster."
+  value       = aws_redshift_cluster.redshift.cluster_parameter_group_name
+}
+
+output "cluster_subnet_group_name" {
+  description = "The name of a cluster subnet group associated with this cluster."
+  value       = aws_redshift_cluster.redshift.cluster_subnet_group_name
+}
+
+output "cluster_public_key" {
+  description = "The public key for the cluster."
+  value       = aws_redshift_cluster.redshift.cluster_public_key
+}
+
+output "cluster_revision_number" {
+  description = "The specific revision number of the database in the cluster."
+  value       = aws_redshift_cluster.redshift.cluster_revision_number
+}
+
+output "cluster_nodes" {
+  description = "The nodes in the cluster."
+  value       = aws_redshift_cluster.redshift.cluster_nodes
+}
+
+output "tags_all" {
+  description = "A map of tags assigned to the resource."
+  value       = aws_redshift_cluster.redshift.tags_all
+}
+
