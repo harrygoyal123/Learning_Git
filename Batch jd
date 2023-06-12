@@ -1,0 +1,128 @@
+
+module "aws_batch_job_definition" {
+  source = "path/to/aws_batch_job_definition"
+
+  name                 = "example-job-definition"
+  type                 = "container"
+  container_properties = "{\"image\": \"my-container-image\"}"
+  parameters           = {
+    "param1" = "value1"
+    "param2" = "value2"
+  }
+  propagate_tags       = true
+  retry_strategy = {
+    attempts = 3
+    evaluate_on_exit = [
+      {
+        action         = "RETRY"
+        on_exit_code   = "0"
+        on_reason      = "SUCCEEDED"
+        on_status_reason = "Execution succeeded"
+      }
+    ]
+  }
+  tags = {
+    "Environment" = "Production"
+    "Team"        = "DevOps"
+  }
+  timeout = {
+    attempt_duration_seconds = 3600
+  }
+}
+
+
+
+
+output "arn" {
+  description = "The Amazon Resource Name (ARN) of the job definition"
+  value       = aws_batch_job_definition.this.arn
+}
+
+output "revision" {
+  description = "The revision of the job definition"
+  value       = aws_batch_job_definition.this.revision
+}
+
+output "tags_all" {
+  description = "A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block"
+  value       = aws_batch_job_definition.this.tags_all
+}
+
+
+
+resource "aws_batch_job_definition" "this" {
+  name = var.name
+  type = var.type
+
+  container_properties = var.container_properties
+  parameters           = var.parameters
+  propagate_tags       = var.propagate_tags
+  retry_strategy       = var.retry_strategy
+  tags                 = var.tags
+  timeout              = var.timeout
+}
+
+
+
+variable "name" {
+  description = "Specifies the name of the job definition"
+  type        = string
+}
+
+variable "type" {
+  description = "The type of job definition. Must be 'container'"
+  type        = string
+}
+
+variable "container_properties" {
+  description = "A valid container properties provided as a single valid JSON document. Required if 'type' is 'container'"
+  type        = string
+  default     = null
+}
+
+variable "parameters" {
+  description = "Specifies the parameter substitution placeholders to set in the job definition"
+  type        = map(string)
+  default     = {}
+}
+
+// variable "platform_capabilities" {
+//   description = "The platform capabilities required by the job definition. Defaults to 'EC2'"
+//   type        = string
+//   default     = "EC2"
+// }
+
+variable "propagate_tags" {
+  description = "Specifies whether to propagate the tags from the job definition to the corresponding Amazon ECS task. Defaults to false"
+  type        = bool
+  default     = false
+}
+
+variable "retry_strategy" {
+  description = "Specifies the retry strategy to use for failed jobs. Maximum number of retry strategy is 1"
+  type        = object({
+    attempts          = number
+    evaluate_on_exit  = list(object({
+      action          = string
+      on_exit_code    = string
+      on_reason       = string
+      on_status_reason = string
+    }))
+  })
+  default     = null
+}
+
+variable "tags" {
+  description = "Key-value map of resource tags"
+  type        = map(string)
+  default     = {}
+}
+
+variable "timeout" {
+  description = "Specifies the timeout for jobs. Maximum number of timeout is 1"
+  type        = object({
+    attempt_duration_seconds = number
+  })
+  default     = null
+}
+
