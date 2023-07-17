@@ -1,0 +1,140 @@
+variable "name" {
+  description = "Name of the storage pool"
+  type        = string
+}
+
+variable "region" {
+  description = "The region where the storage pool is created"
+  type        = string
+}
+
+variable "zone" {
+  description = "Location of the pool"
+  type        = string
+}
+
+variable "size" {
+  description = "Storage pool size"
+  type        = number
+}
+
+variable "network" {
+  description = "Network name"
+  type        = string
+}
+
+variable "global_ad_access" {
+  description = "Enables global access to Active Directory controllers outside of the pool's region"
+  type        = bool
+  default     = false
+}
+
+variable "service_level" {
+  description = "Service level: StandardSW or ZoneRedundantStandardSW"
+  type        = string
+}
+
+variable "storage_class" {
+  description = "Storage class: Software"
+  type        = string
+}
+
+variable "billing_label" {
+  description = "Key-value pair for billing labels"
+  type        = list(object({
+    key   = string
+    value = string
+  }))
+  default = []
+}
+
+variable "shared_vpc_project_number" {
+  description = "The host project number when deploying in a shared VPC service project"
+  type        = string
+  default     = null
+}
+
+variable "regional_ha" {
+  description = "Flag indicating if the pool is regional (deprecated, replaced by service_level)"
+  type        = bool
+  default     = false
+}
+
+variable "secondary_zone" {
+  description = "Secondary zone if service level is ZoneRedundantStandardSW"
+  type        = string
+  default     = null
+}
+
+
+
+
+
+
+
+
+
+output "id" {
+  description = "The unique identifier for the storage pool"
+  value       = aws_storage_pool.example.id
+}
+
+output "managed_pool" {
+  description = "A pool which was automatically created when using creating pre-StoragePool volumes"
+  value       = aws_storage_pool.example.managed_pool
+}
+
+
+
+
+
+
+
+
+resource "aws_storage_pool" "example" {
+  name          = var.name
+  region        = var.region
+  zone          = var.zone
+  size          = var.size
+  network       = var.network
+  global_ad_access = var.global_ad_access
+  service_level = var.service_level
+  storage_class = var.storage_class
+  billing_label = var.billing_label
+
+  shared_vpc_project_number = var.shared_vpc_project_number
+  regional_ha               = var.regional_ha
+  secondary_zone            = var.secondary_zone
+}
+
+
+
+
+
+module "aws_storage_pool" "example" {
+  source = "./modules/aws_storage_pool"
+
+  name          = "my-storage-pool"
+  region        = "us-west-2"
+  zone          = "us-west-2a"
+  size          = 100
+  network       = "my-network"
+  global_ad_access = true
+  service_level = "StandardSW"
+  storage_class = "Software"
+
+  billing_label = [
+    {
+      key   = "department"
+      value = "engineering"
+    },
+    {
+      key   = "cost-center"
+      value = "12345"
+    }
+  ]
+
+  shared_vpc_project_number = "1234567890"
+  regional_ha               = false
+  secondary_zone            = "us-west-2b"
+}
